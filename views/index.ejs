@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>todo</title>
+</head>
+<body>
+    <button onclick="addTodo()">click</button>
+    <ul id="a">
+
+
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script>
+        const list = document.getElementById("a");
+
+        function getTodo(){
+            list.innerHTML=""
+            axios.get('/get')
+            .then(res => {
+                res.data.forEach(todo => {
+                    list.innerHTML += "<li>"+todo.message+"</li>"; 
+                })
+                console.log(res.data)
+            })
+        }
+
+            function addTodo(){
+                axios.get('create', {
+                    params: {
+                        message: "1234"
+                    }
+                })
+                getTodo();
+            }
+
+            getTodo();
+    </script>
+</body>
+</html>
